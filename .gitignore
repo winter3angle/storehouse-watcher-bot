@@ -1,0 +1,7 @@
+__pycache__/
+/venv
+.env
+tests/.pytest_cache/**
+res.html
+/tests/.pytest_cache/
+.idea/
