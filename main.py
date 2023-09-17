@@ -85,7 +85,8 @@ class Bot:
         self._logger.info("Building app")
         bot_app = ApplicationBuilder().token(bot_token).build()
         job_queue = bot_app.job_queue
-        job_queue.run_repeating(self._poll_storehouses, interval=10, name=self._job_name_poll)
+        poll_interval = os.environ[envars.STOREHOUSE_POLL_INTERVAL_SEC] or 60
+        job_queue.run_repeating(self._poll_storehouses, interval=poll_interval, name=self._job_name_poll)
 
         self._logger.info("Registering command handlers")
         bot_app.add_handler(CommandHandler('subscribe', self._subscribe))
